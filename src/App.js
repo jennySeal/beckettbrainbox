@@ -1,24 +1,28 @@
-import logo from './logo.svg';
+import {Link} from 'react-router-dom';
+import Header from './components/Header';
+import Name from './components/Name';
+import UseForm from './components/useForm';
+import Scoreboard from './components/Scoreboard';
+import {useState} from 'react';
+
+
 import './App.css';
 
-function App() {
+const App = () => {
+
+  const [values, handleChange] = UseForm({username: ""})
+  console.log(values)
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+       <div className="App" id="outerEdge">
+      <Header/>
+      <Name values={values} handleChange={handleChange}/>
+      <Link to="/scoreboard">Scoreboard</Link>
+
+
     </div>
+
   );
 }
 
