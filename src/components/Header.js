@@ -1,8 +1,9 @@
 const Header = () => {
     return (
         <div >
+        <header>
         <h1>Beckett Brainbox</h1>
-        <h2>Who will be Brains of the Day?</h2>
+        </header>
         </div>
     )
 }

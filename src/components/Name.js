@@ -1,16 +1,29 @@
+import { useSelector, useDispatch } from "react-redux";
+import { addUsername, selectUsername } from "../slice_reducers/usernameSlice";
+import UseForm from './UseForm';
+
+const Name = () => {
 
 
-const Name = ({values, handleChange}) => {
+    const [values, handleChange] = UseForm({username: ""})
+
+    const username = useSelector(selectUsername)
+    const dispatch = useDispatch()
     
- 
+    const login = (e) => {
+        e.preventDefault()
+        dispatch(addUsername(values))
+        
+    }
 
     return (
         <div>
+            <h2>Who will be <br/>Brains of the Day?</h2>
             <form>
-            <label htmlFor="username"><h3>What is your name?</h3>
-            <input id="username" name="username" type="text" value={values.username}  onChange={handleChange}/>
+            <label htmlFor="usernameInput"><h3>What is your name?</h3>
+            <input type="username" id="username" name="username" value={values.username} placeholder="" onChange={handleChange} required />
             </label>
-            <button type="button">Submit</button>
+            <button type="submit" value="Submit" onClick={login}>Submit</button>
 
             </form>
         </div>

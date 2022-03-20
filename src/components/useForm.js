@@ -10,7 +10,9 @@ const UseForm = initialValues => {
             setValues({
                 ...values, 
                 [e.target.name]: e.target.value
+                
             });
+            
         }
     ];
 };
