@@ -1,60 +1,101 @@
-.App {
+
+:root {
   text-align: center;
-  background-color: #282c34;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  font-size: 30px;
-  font-family: "RoadRage-Regular", sans-serif;
-  color: rgb(43, 42, 42);
+  font-size: 20px;
+  font-family: "Roboto", sans-serif;
+ 
+  --black:#181818; 
+  --blue: #2CCCC3;
+  --cream: #FDF5DF;
+  --yellow: #FECD45;
+  --pink: #E60576;
+  
+  color: var(--cream);
 }
 
-@font-face {
-  font-family: "RoadRage-Regular";
-  src: url('./styles/RoadRage-Regular.ttf');
-}
-
-button {
-  font-family: 'RoadRage-Regular';
+html {
+  padding: 0;
+  margin: 0;
 }
 
 #outerEdge {
   display: flex;
-  height: 94vh;
-  width: 40vw;
+  height: 86vh;
   vertical-align: center;
   justify-content: center;
+  flex-direction: column;
   min-width: 300px;
-  border: 1vw solid #61dafb;
-  border-radius: 0.25vw;
-  background-color: ghostwhite;
+  border-radius: 1vh;
+  background-color: var(--black);
+  border-top-left-radius: 0vh;
+  border-top-right-radius: 0vh;
+  padding: 2vh;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.imageContainer {
+  display: flex;
+  justify-content: center;
+  
 }
+
 
 header {
-  background-color: black;
-  min-height: 10vh;
-  position: absolute;
-  top: 2vh;
-  width: 40vw;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  min-height: 8vh;
+  font-size: 1em;
+  background-color: var(--yellow);
+  border-top-left-radius: 1vh;
+  border-top-right-radius: 1vh;
+  margin: 0;
+  border-bottom: 1vh solid var(--pink);
+  
 }
 
-.App-link {
-  color: #61dafb;
+h1 {
+  margin: 0;
+  padding: 0.5vw;
+  color: var(--black);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+button, a {
+  background-color: var(--black);
+  color: var(--yellow);
+  border-radius: 1vh;
+  border: 0.25vw solid var(--blue);
+  padding: 1.5vw;
+  text-decoration: none;
+  font-family: Roboto;
+  font-size: 1em;
+  cursor: pointer;
+  margin: 2vw;
+}
+
+.buttons  {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+h2  {
+  color: var(--cream);
+}
+
+h4 {
+  font-size: 1.25em;
+}
+
+input {
+  padding: 1vw;
+  border: 0.45vw solid var(--blue);
+  border-radius: 0.5vw;
+  text-align: center;
+  background: var(--cream);
+  margin: 3vw;
+  font-size: 1em;
+  font-family: Roboto;
 }
