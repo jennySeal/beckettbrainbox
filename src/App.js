@@ -5,9 +5,8 @@ import Header from './components/Header';
 import Home from './components/Home';
 import Name from './components/Name';
 import Welcome from './components/Welcome';
-import Countdown from "react-countdown";
 import TimesUp from './components/TimesUp';
-
+import Quiz from './components/Quiz';
 
 import './App.css';
 import Scoreboard from './components/Scoreboard';
@@ -41,7 +40,7 @@ const App = () => {
       <Route path='/scoreboard' element={<Scoreboard name={username}/>}/>
       <Route path='/name' element={<Name name={username} hasStarted={hasStarted} handleSubmit={gameHasStarted}/>}/>
       <Route path='/welcome/' element={<Welcome name={username} startGame={startGame} hasStarted={hasStarted}/>}/>
-
+      <Route path='/quiz' element={<Quiz name={username}/>}/>
       </Routes>
 
     </div>

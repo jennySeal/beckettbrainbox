@@ -99,3 +99,12 @@ input {
   font-size: 1em;
   font-family: Roboto;
 }
+
+.countdown {
+  color: var(--yellow);
+  font-family: monospace;
+  font-size: 1em;
+  border: 0.2em solid var(--pink);
+  padding: 0.4em;
+}
+
