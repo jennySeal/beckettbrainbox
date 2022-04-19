@@ -10,6 +10,7 @@ const Home = ({name:name}) => {
       <img src={Trophy} alt="gold trophy"/>
       </div>
       <h2>Who will be Brains of the Day?</h2>
+      <br/>
       <div className='buttons'><Link to="/name" >Let's get started</Link> 
         <Link to="/scoreboard" name={name}>Scoreboard</Link></div>
         </div>
