@@ -1,19 +1,22 @@
 import { Link } from "react-router-dom";
+import Name from './Name';
+import Welcome from "./Welcome";
 import Trophy from './GoldCupTrophy.png';
 
-
-const Home = ({name:name}) => {
-
-    return (
+const Home = ({username, gotAPlayer, hasPlayer, startGame}) => {
+console.log(hasPlayer)
+     return (
     <div>
+      <h2>Who will be Brains of the Day?</h2>
+      {!!hasPlayer ? <h3>It could be you, {username}!</h3> : " "}  
     <div className='imageContainer'>
       <img src={Trophy} alt="gold trophy"/>
       </div>
-      <h2>Who will be Brains of the Day?</h2>
       <br/>
-      <div className='buttons'><Link to="/name" >Let's get started</Link> 
-        <Link to="/scoreboard" name={name}>Scoreboard</Link></div>
+    
+      {!!hasPlayer ? <Welcome startGame={startGame}/> : <Name gotAPlayer={gotAPlayer} />}
         </div>
+
     )
 }
 

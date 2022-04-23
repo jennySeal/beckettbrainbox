@@ -1,11 +1,10 @@
-import Countdown from "react-countdown";
-import TimesUp from "./TimesUp";
 import axios from 'axios';
 import { Spinner } from "react-bootstrap";
+import Quizover from './Quizover';
+import CountdownDisplay from "./CountdownDisplay";
 
-import { useEffect, useState} from "react";
+import React, { useEffect, useState} from "react";
 
-const baseUrl = "https://opentdb.com/api.php?amount=10"
 const waiting = 
 <div><Spinner animation="grow" role="status" variant="warning">
 <span className="visually-hidden">Loading...</span>
@@ -18,41 +17,101 @@ const waiting =
 </Spinner>
 </div>
 
-const Quiz = (username) => {
+const baseUrl = "https://opentdb.com/api.php?amount=50"
 
-    const [quizQs, setQuizQs] = useState("");
 
+const cleanUpData = (string) => {
+    return string.replace(/&quot;/g, "").replace(/&#039;/g, "'").replace(/&amp;/g, "&").replace(/&eacute;/g, "é").replace()
+}
+
+const Quiz = ({name:username, score, addToScore, hasStarted}) => {
+
+    const [quizqs, setQuizQs] = useState("");
     useEffect(() => {
         axios.get(baseUrl).then((response) => {
             setQuizQs(response.data);
         })
     }, [])
-
-    if (!quizQs) return waiting;
-
-    const question = quizQs.results[0]
-    console.log(question)
-    const stringQ = question.question.toString()
     
-    const stringWithoutQuotes = stringQ.replace(/&quot;/g, " ")
-    const stringWithoutApostrophes = stringWithoutQuotes.replace(/&#039;/g, "'")
-    const stringSanitized = stringWithoutApostrophes.replace(/&eacute;/g, "é")
-    const allAnswers = question.incorrect_answers.push(question.correct_answer) 
+    console.log(quizqs)
+    let stringQ = 'nothing to see';
+    let shuffledAnswers = ['nothing', 'to', 'see']
+    const [question, setQuestion] = useState(0)
+    const [quizover, setQuizover] = useState(false);
+    
+
+    if (!quizqs) {
+        return waiting;
+    }
+
+    const becketizeQuestions = (questions) => {
+        let unsuitableCategories = ['Entertainment: Video Games', 'Entertainment: Japanese Anime & Manga', 'Entertainment: Television', 'Science: Computers', 'Entertainment: Musicals & Theatres', 'Entertainment: Cartoon & Animations', 'Entertainment: Comics']
+        return !unsuitableCategories.includes(questions.category)  
+            }
+
+    let suitableQs = quizqs.results.filter(becketizeQuestions)
+
+    console.log(suitableQs)
+
+    const currentQuestion = suitableQs[question]
+    console.log(currentQuestion)
+    stringQ = currentQuestion.question.toString()
+    
+    
+    const allAnswers = currentQuestion.incorrect_answers.push(currentQuestion.correct_answer) 
+
+    const shuffleArray = (arr) => {
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+          return arr;
+        }
+    }
+    shuffledAnswers = shuffleArray(currentQuestion.incorrect_answers)
+
+    const changeQuestion = (e, answer) => {
+        e.preventDefault()
+        if (answer === currentQuestion.correct_answer) {
+            addToScore(e)
+        }
+        let nextQuestion = question;
+        nextQuestion++
+        nextQuestion < 10 ? setQuestion(nextQuestion) : quizOver();
+    }
+
+    const quizOver = (quizover) => {
+        console.log('quiz is over')
+        setQuizover(true);
+      }
+    
+
+
+    const listAnswers = shuffledAnswers.map((answer, key) => {
+        return <button key={answer} type="button" className="quizButton" onClick={(e)=>changeQuestion(e, answer)}>{cleanUpData(answer)}</button>
+    })
+
+
+    
 
 return (
-<div>
+    <React.Fragment>
+    {!quizover && <div>
     <br/><br/>
-    <h4>Question One</h4>
-    <p>{stringSanitized}</p>
-    {quizQs.results[0].incorrect_answers.map((answer, key) => {
-        return <button className="quizButton" id={key}>{answer}</button>
-    })}
+    <h4>Question {question + 1}</h4>
+    <p>{cleanUpData(stringQ)}</p>
+    {listAnswers}
     <br/>
-    <Countdown className="countdown" date={Date.now() + 300000}>
-    <TimesUp/>
-    </Countdown>
-</div>
+    </div>}
+    {hasStarted && <CountdownDisplay/>}
+
+    {quizover && <div>    
+    <Quizover name={username} score={score} suitableQs={suitableQs} cleanUpData={cleanUpData}/>
+
+</div>}
+</React.Fragment>  
+
 )
 }
+
 
 export default Quiz;

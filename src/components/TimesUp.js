@@ -2,7 +2,7 @@
 const TimesUp = () => {
     
     return (
-        <div >
+        <div className="countdown">
         <h2>Times Up Brainbox!</h2>
         </div>
     )
