@@ -6,12 +6,11 @@ const renderer = ({minutes, seconds, completed}) => {
     if (completed) {
       return <TimesUp/>;
     } else {
-      console.log({seconds})
       if (seconds < 10) {
-        return <p>0{minutes}:0{seconds}</p>
+        return <span>0{minutes}:0{seconds}</span>
       } else {
       
-      return <p>0{minutes}:{seconds}</p>
+      return <span>0{minutes}:{seconds}</span>
     }}
   };
 
@@ -21,10 +20,10 @@ const CountdownDisplay = () => {
 
 return (
     <div  className='countdown'>
-    <h3>Time left</h3>
+    <h3>Time left:&nbsp; 
     <Countdown date={Date.now() + 300000} renderer={renderer}>
     <TimesUp/>
-    </Countdown></div>
+    </Countdown></h3></div>
 )
 }
 export default memo(CountdownDisplay);

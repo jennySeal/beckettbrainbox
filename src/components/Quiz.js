@@ -97,12 +97,17 @@ return (
     <React.Fragment>
     {!quizover && <div>
     <br/><br/>
+    <div className='questionContainer'>
     <h4>Question {question + 1}</h4>
     <p>{cleanUpData(stringQ)}</p>
+    <div id="quizAnswers">
     {listAnswers}
+    </div>
     <br/>
-    </div>}
     {hasStarted && <CountdownDisplay/>}
+    </div>
+    </div>}
+
 
     {quizover && <div>    
     <Quizover name={username} score={score} suitableQs={suitableQs} cleanUpData={cleanUpData}/>

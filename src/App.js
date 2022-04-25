@@ -52,7 +52,7 @@ const App = () => {
      <Header/>
       <div className='scoreAndQuiz'>
       <Scoreboard name={username} score={score}/>
-      <div className="App" id="outerEdge">
+      <div className="outerEdge">
       <Routes>      
       <Route path='/' element={<Home username={username} gotAPlayer={gotAPlayer} hasPlayer={hasPlayer} startGame={startGame}/>}/>
       <Route path='/quiz' element={<Quiz hasStarted={hasStarted} score={score} addToScore={addToScore}/>}/>
